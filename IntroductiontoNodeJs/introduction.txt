@@ -1,0 +1,92 @@
+Introduction to Node.js
+
+• Node.js is an open-source, cross-platform JavaScript runtime environment that enables developers to run JavaScript code outside of a web browser.
+
+• It runs the V8 JavaScript engine, the core of Google Chrome, outside of the browser.
+
+• Node.js operates in a single-threaded process and uses an event-driven, non-blocking architecture, making it ideal for handling concurrent requests efficiently.
+
+• It allows developers to use JavaScript for both frontend and backend development, making the development process faster and easier.
+
+• Key Features of Node.js---
+
+- High Performance: Uses the V8 engine for fast execution.
+- Scalability: Handles many simultaneous connections, making it suitable for real-time applications.
+- Unified Language: JavaScript is used both on the client-side and server-side.
+- Large Ecosystem: npm (Node Package Manager) provides access to thousands of pre-built modules.
+
+• Use Cases of Node.js---
+
+- Web Servers: Fast, scalable web servers.
+- APIs: Lightweight RESTful APIs.
+- Real-Time Applications: Chat apps, notifications, multiplayer games.
+- IoT: Handles multiple requests for IoT applications.
+
+• Core Technologies---
+
+- Event-Driven Architecture: Uses an event loop to handle multiple requests simultaneously without new threads.
+- libuv: Library enabling asynchronous I/O operations for efficient concurrency.
+
+• Node.js Frameworks & Libraries---
+
+- Express.js: A lightweight framework for web applications and APIs.
+- Socket.io: Library for real-time communication.
+- Mongoose: A library for interacting with MongoDB.
+- PM2: A process manager for keeping Node.js applications running.
+
+• Latest JavaScript Engines Used by Web Browsers (2025)---
+
+1. Google Chrome: Uses the 'V8 JavaScript engine'.
+2. Mozilla Firefox: Uses 'SpiderMonkey' as the JavaScript engine.
+3. Apple Safari: Uses 'JavaScriptCore' (also known as Nitro).
+4. Microsoft Edge: After switching to Chromium in 2020, Edge now uses the 'V8 engine'
+
+• Important Concepts---
+
+1) How Does Node.js Work?
+- Node.js runs on a single-threaded non-blocking event loop model, enabling it to handle many requests without blocking operations.
+
+2) Advantages of Node.js
+- High performance due to the V8 engine.
+- Ideal for real-time applications (e.g., chat apps, notifications).
+- Great for microservices architecture.
+- npm ecosystem accelerates development.
+
+3) Disadvantages of Node.js
+- Not suitable for CPU-intensive tasks (e.g., video processing).
+- Callback Hell: Complex nested callbacks, but can be avoided using Promises/async-await.
+
+4) Why is Node.js Important?
+- Real-Time Communication: Ideal for applications like chat and live-streaming.
+- Full-Stack Development: JavaScript for both frontend and backend.
+- Microservices: Supports scalable and independent services.
+
+5) How Does Node.js Handle Concurrency?
+- Node.js uses a non-blocking, event-driven architecture.
+- This means it can handle multiple requests without waiting for one to complete before starting the next.
+- It uses a single thread to manage all requests but delegates I/O operations to the system, allowing for efficient parallel processing.
+
+6) When and by whom was Node.js invented, and what key technologies were used in its creation?
+- Node.js was invented in 2009 by Ryan Dahl.
+- It was first released in May 2009.
+- Ryan Dahl created it to address the need for a platform capable of handling many simultaneous connections efficiently, especially for real-time applications.
+- He combined the V8 JavaScript engine with a non-blocking, event-driven architecture and used C++ for performance optimizations.
+- This made Node.js fast and scalable for building server-side applications using JavaScript.
+
+7) What is the difference between client-side and server-side in web development?
+- Client-side: The part of a web application that runs on the user's browser, responsible for rendering the interface and handling user interactions.
+- Server-side: The part of a web application that runs on the web server, responsible for processing requests, managing data, and sending responses to the client.
+
+8) What is API?
+- An API (Application Programming Interface) is a set of rules and protocols that allows different software applications to communicate with each other by sending requests and receiving responses to exchange data and functionality.
+
+Example:- Imagine a waiter in a restaurant as an API:
+- The customer (user) gives a request (order) to the waiter (API).
+- The waiter takes the order and goes to the kitchen (server).
+- The kitchen prepares the food (data or functionality) and sends it back to the waiter (API).
+- The waiter then delivers the response (food) to the customer (user).
+
+9) What is the role of npm?
+- npm is used to manage and install packages, speeding up development by providing ready-to-use libraries. 
+
+---
