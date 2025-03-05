@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Manager</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(to right, #1a2980, #26d0ce, #1a2980);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      .container {
+        background: rgba(255, 255, 255, 0.85);
+        padding: 40px 50px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        animation: fadeInUp 1s ease-out;
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        0% {
+          transform: translateY(-30px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeInText {
+        0% {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes scaleUp {
+        0% {
+          transform: scale(0.9);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      @keyframes gradientMove {
+        0% {
+          background-position: 100% 0;
+        }
+        50% {
+          background-position: 0% 100%;
+        }
+        100% {
+          background-position: 100% 0;
+        }
+      }
+
+      /* Heading */
+      h1 {
+        font-family: "Poppins", sans-serif;
+        font-size: 36px;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 20px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        background: linear-gradient(90deg, #1a2980, #26d0ce, #1a2980);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: fadeInUp 1s ease-out, gradientMove 3s ease-in-out infinite;
+      }
+
+      h1 i {
+        margin-right: 10px;
+        vertical-align: middle;
+        font-size: 40px;
+        color: #1a2980;
+      }
+
+      /* Form */
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        animation: fadeInText 1s ease-out;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        background-color: #f9f9f9;
+        transition: border-color 0.3s ease;
+      }
+
+      input:focus,
+      textarea:focus {
+        border-color: #28a745;
+        outline: none;
+      }
+
+      /* Buttons */
+      .btn-group {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      button {
+        padding: 12px 25px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        animation: scaleUp 0.4s ease-in-out;
+      }
+
+      .submit-btn {
+        background-color: #007bff;
+        color: white;
+      }
+
+      .submit-btn:hover {
+        background-color: #0056b3;
+      }
+
+      .reset-btn {
+        background-color: #ff4d4d;
+        color: white;
+        margin-left: 10px;
+      }
+
+      .reset-btn:hover {
+        background-color: #d32f2f;
+      }
+
+      .view-tasks-btn {
+        display: block;
+        text-align: center;
+        margin-top: 15px;
+        font-weight: bold;
+        color: #007bff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .view-tasks-btn:hover {
+        color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1><i class="ri-task-line"></i> Add a New Task</h1>
+      <form id="task-form" action="/add-task" method="POST">
+        <div class="form-group">
+          <label for="title">Task Title</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            placeholder="Enter task title"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="description">Task Description</label>
+          <textarea
+            id="description"
+            name="description"
+            placeholder="Enter task description"
+            rows="4"
+            required
+          ></textarea>
+        </div>
+        <div class="btn-group">
+          <button type="submit" class="submit-btn">Add Task</button>
+          <button
+            type="button"
+            class="reset-btn"
+            onclick="document.getElementById('task-form').reset();"
+          >
+            Reset
+          </button>
+        </div>
+      </form>
+      <a href="/todayTask" class="view-tasks-btn">View Today's Tasks</a>
+    </div>
+  </body>
+</html>
