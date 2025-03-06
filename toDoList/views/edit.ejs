@@ -213,13 +213,12 @@
       </form>
     </div>
     <script>
-      let initialTitle = "<%= task.title %>";
-      let initialDescription = "<%= task.description %>";
-
-      function resetForm() {
-        document.getElementById("title").value = initialTitle;
-        document.getElementById("description").value = initialDescription;
-      }
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelector(".reset-btn").addEventListener("click", () => {
+          document.getElementById("title").value = "";
+          document.getElementById("description").value = "";
+        });
+      });
     </script>
   </body>
 </html>
