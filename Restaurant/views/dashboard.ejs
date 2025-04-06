@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Restaurant Dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #121212;
+        color: #fff;
+        font-family: "Poppins", sans-serif;
+        overflow-x: hidden;
+      }
+
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 220px;
+        background-color: #1e1e1e;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+      }
+
+      .sidebar .logo {
+        font-size: 30px;
+        font-weight: bold;
+        color: #ff6f00;
+        text-align: center;
+      }
+
+      .sidebar a {
+        color: #ccc;
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: 10px;
+        display: block;
+        transition: 0.3s;
+      }
+
+      .sidebar a:hover,
+      .sidebar a.active {
+        background-color: #ff6f00;
+        color: #fff;
+      }
+
+      .main {
+        margin-left: 240px;
+        padding: 30px;
+        min-height: 100vh;
+        overflow-y: auto;
+        background-color: #181818;
+      }
+
+      .section-title {
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+
+      .scroll-x {
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 20px;
+      }
+
+      .dish-card {
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 20px;
+        background-color: #252525;
+        padding: 20px;
+        border-radius: 20px;
+        width: 260px;
+        color: #fff;
+        position: relative;
+      }
+
+      .dish-card img {
+        border-radius: 15px;
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .dish-card h5 {
+        margin-top: 15px;
+        font-size: 20px;
+      }
+
+      .dish-card .price {
+        color: #ff6f00;
+        font-weight: bold;
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      .dish-card .rating i {
+        color: #ffc107;
+      }
+
+      .dish-card .small {
+        font-size: 14px;
+        color: #ccc;
+        word-wrap: break-word;
+      }
+
+      .card-action {
+        margin-top: 15px;
+      }
+
+      .card-action a {
+        margin: 0 5px;
+        transition: all 0.3s ease;
+      }
+
+      .card-action a:hover {
+        transform: scale(1.05);
+        background-color: #fff !important;
+        color: #000 !important;
+        box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+      }
+
+      .badge-category {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background: #28a745;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+        z-index: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo">
+        <img
+          src="https://www.leonardorestaurant.in/images/demo/default/logo/logo.png"
+          alt="Pavilion Restaurant Logo"
+          style="height: 40px"
+        />
+      </div>
+
+      <a href="/dashboard" class="active">Dashboard</a>
+      <a href="/form">Add Dish</a>
+      <a href="#dishInventory">Show Dishes</a>
+      <a href="#">Orders</a>
+      <a href="#">Restaurants</a>
+      <a href="#">Finance</a>
+      <a href="/logout">Logout</a>
+    </div>
+
+    <% if (updated) { %>
+    <div
+      class="toast-container position-fixed bottom-0 end-0 p-3"
+      style="z-index: 9999"
+    >
+      <div
+        id="updateToast"
+        class="toast align-items-center text-bg-success border-0 show"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="d-flex">
+          <div class="toast-body">✅ Dish updated successfully!</div>
+          <button
+            type="button"
+            class="btn-close btn-close-white me-2 m-auto"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      setTimeout(() => {
+        const toast = document.getElementById("updateToast");
+        if (toast) {
+          const bsToast = bootstrap.Toast.getOrCreateInstance(toast);
+          bsToast.hide();
+        }
+      }, 5000);
+    </script>
+    <% } %>
+
+    <!-- Main Content -->
+    <div class="main">
+      <h1 class="mb-4">Welcome to Your Restaurant Dashboard</h1>
+
+      <!-- Popular Dishes -->
+      <div class="popular">
+        <h2 class="section-title">Popular Dishes</h2>
+        <div class="scroll-x">
+          <% record.map((e) => { const { id, name, price, category, ingredients,
+          image } = e; %>
+          <div class="dish-card">
+            <span class="badge-category"><%= category %></span>
+            <img src="<%= image %>" alt="Dish" />
+            <h5><%= name %></h5>
+            <p class="price">₹<%= price %></p>
+            <div class="rating mb-2">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+              <i class="far fa-star"></i>
+            </div>
+            <p class="small">
+              <strong>Ingredients:</strong> <%= ingredients %>
+            </p>
+            <div class="card-action text-center">
+              <a
+                href="/edit?id=<%= id %>"
+                class="btn btn-outline-warning btn-sm px-3"
+                >Edit</a
+              >
+              <a
+                href="/delete/<%= id %>"
+                class="btn btn-outline-danger btn-sm px-3"
+                >Delete</a
+              >
+            </div>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
