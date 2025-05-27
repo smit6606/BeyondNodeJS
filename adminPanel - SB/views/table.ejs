@@ -1,0 +1,25 @@
+<h1>Movie List</h1>
+<a href="/form">Add New Movie</a>
+<table border="1">
+  <tr>
+    <th>Poster</th>
+    <th>Name</th>
+    <th>Release Year</th>
+    <th>Genre</th>
+    <th>Cast</th>
+    <th>Actions</th>
+  </tr>
+  <% record.forEach((movie) => { %>
+  <tr>
+    <td><img src="/<%= movie.poster %>" width="100" /></td>
+    <td><%= movie.name %></td>
+    <td><%= movie.releaseYear %></td>
+    <td><%= movie.genre %></td>
+    <td><%= movie.cast %></td>
+    <td>
+      <a href="/edit?id=<%= movie._id %>">Edit</a>
+      <a href="/delete/<%= movie._id %>">Delete</a>
+    </td>
+  </tr>
+  <% }); %>
+</table>

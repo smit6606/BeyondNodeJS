@@ -1,0 +1,15 @@
+<h1>Edit Movie Info</h1>
+<form action="/movie-inventory" method="POST" enctype="multipart/form-data">
+  <input type="hidden" name="id" value="<%= record._id %>" />
+  <input type="text" name="name" value="<%= record.name %>" required />
+  <input type="number" name="releaseYear" value="<%= record.releaseYear %>" required />
+  <select name="genre" required>
+    <option value="">Select Genre</option>
+    <option value="Action" <%= record.genre === "Action" ? "selected" : "" %>>Action</option>
+    <option value="Drama" <%= record.genre === "Drama" ? "selected" : "" %>>Drama</option>
+    <option value="Comedy" <%= record.genre === "Comedy" ? "selected" : "" %>>Comedy</option>
+  </select>
+  <textarea name="cast"><%= record.cast %></textarea>
+  <input type="file" name="poster" />
+  <button type="submit">Update</button>
+</form>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Home</title>
+  </head>
+  <body>
+    <center>
+      <h1>All Students</h1>
+      <table border="2" cellspacing="0" cellpadding="10">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Name</th>
+            <th>College</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% detailStudents.forEach((student, index) => { %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td>
+              <a
+                href="/student <%= student.name %>"
+                style="text-decoration: none"
+                ><%= student.name %></a
+              >
+            </td>
+            <td><%= student.college %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </center>
+  </body>
+</html>

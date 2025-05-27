@@ -1,0 +1,14 @@
+<h1>Add New Movie</h1>
+<form action="/movie-inventory" method="POST" enctype="multipart/form-data">
+  <input type="text" name="name" placeholder="Movie Name" required />
+  <input type="number" name="releaseYear" placeholder="Release Year" required />
+  <select name="genre" required>
+    <option value="">Select Genre</option>
+    <option value="Action">Action</option>
+    <option value="Drama">Drama</option>
+    <option value="Comedy">Comedy</option>
+  </select>
+  <textarea name="cast" placeholder="Enter Cast" required></textarea>
+  <input type="file" name="poster" required />
+  <button type="submit">Submit</button>
+</form>

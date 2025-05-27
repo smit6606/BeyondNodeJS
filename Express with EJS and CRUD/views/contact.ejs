@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Contact</title>
+  </head>
+  <body>
+    <center>
+      <h1>Contact List</h1>
+      <table border="2" cellspacing="0" cellpadding="10">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% detailStudents.forEach(student => { %>
+          <tr>
+            <td><%= student.name %></td>
+            <td><%= student.email %></td>
+            <td><%= student.phone %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <br />
+      <a href="/">Back to Home</a>
+    </center>
+  </body>
+</html>

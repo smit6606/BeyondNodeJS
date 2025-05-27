@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Student Details</title>
+  </head>
+  <body>
+    <center>
+      <h1>Details of <%= student.name %></h1>
+      <table border="2" cellspacing="0" cellpadding="10">
+        <tr>
+          <th>Name:</th>
+          <td><%= student.name %></td>
+        </tr>
+        <tr>
+          <th>Age:</th>
+          <td><%= student.age %></td>
+        </tr>
+        <tr>
+          <th>Email:</th>
+          <td><%= student.email %></td>
+        </tr>
+        <tr>
+          <th>Phone:</th>
+          <td><%= student.phone %></td>
+        </tr>
+        <tr>
+          <th>College</th>
+          <td><%= student.college %></td>
+        </tr>
+        <tr>
+          <th>Degree</th>
+          <td><%= student.degree %></td>
+        </tr>
+      </table>
+      <br />
+      <a href="/">Back to Home</a>
+    </center>
+  </body>
+</html>

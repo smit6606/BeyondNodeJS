@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Employee</title>
+</head>
+
+<body>
+    <h1 style="text-align: center;">Employee Page</h1>
+
+    <form method="post" action="/employee/addEMP">
+        <table align="center" border="1">
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="name" placeholder="enter name"></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" name="password" placeholder="enter password"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" name="submit" value="Add EMP"></td>
+            </tr>
+        </table>
+    </form>
+
+    <br>
+    <br>
+
+    <table align="center" border="1">
+        <tr>
+            <th>Name</th>
+            <th>Password</th>
+            <th>Action</th>
+        </tr>
+
+        <% records.map((data)=> { %>
+            <tr>
+                <td>
+                    <%= data.name %>
+                </td>
+                <td>
+                    <%= data.password %>
+                </td>
+                <td>
+                    <button><a href="/employee/upEMP/<%= data.id %>"
+                            style="color: green; text-decoration: none;">Update</a></button>
+                    <button><a href="/employee/delEMP?id=<%= data.id %>"
+                            style="color: red; text-decoration: none;">Delete</a></button>
+                </td>
+            </tr>
+            <% })%>
+    </table>
+</body>
+
+</html>
