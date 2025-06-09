@@ -1,0 +1,30 @@
+{
+  "name": "admin-panel-by-smit-garala",
+  "version": "1.0.0",
+  "description": "Admin Panel",
+  "keywords": [
+    "add",
+    "product",
+    "category"
+  ],
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "dependencies": {
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.7",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "mongoose": "^8.14.2",
+    "multer": "^1.4.5-lts.2",
+    "nodemailer": "^7.0.3",
+    "nodemon": "^3.1.10",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0"
+  }
+}
