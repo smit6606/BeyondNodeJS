@@ -116,6 +116,9 @@ const viewAdmin = async (req, res) => {
   try {
     let adminData = await Admin.find({});
     const currentAdmin = req.user;
+    adminData = adminData.filter((admin) => {
+      return admin.admin_email !== currentAdmin.admin_email;
+    });
 
     console.log("User Data", adminData);
 
@@ -202,7 +205,7 @@ const editAdminFunction = async (req, res) => {
     if (req.file) {
       if (data.admin_image) {
         try {
-          await fs.unlink("uploads/" + data.admin_image);
+          fs.unlinkSync("uploads/" + data.admin_image);
           console.log("Old Image Deleted...");
         } catch (err) {
           console.error("Error deleting old image:", err.message);
@@ -221,10 +224,13 @@ const editAdminFunction = async (req, res) => {
 
     if (updatedData) {
       console.log("Admin Data Updated...");
-      req.flash("success", "Admin Data Updated Successfully");
+      req.flash("success", `${updatedData.admin_name}Updated Successfully`);
     } else {
       console.log("Admin Data not Updated...");
-      req.flash("error", "Admin Data not Updated, please try again");
+      req.flash(
+        "error",
+        `${updatedData.admin_name} not Updated, please try again`
+      );
     }
 
     return res.redirect("/viewAdmin");
@@ -276,9 +282,8 @@ const updatePassword = async (req, res) => {
                   "error",
                   "Error while logging out after password change"
                 );
-                return res.redirect("/changePassword");
+                res.redirect("/changePassword");
               }
-              req.flash("success", "Password updated successfully");
               res.redirect("/");
             });
           } else {
@@ -459,7 +464,10 @@ const otpVerifyPage = (req, res) => {
   if (currentAdmin != undefined) {
     res.redirect("/dashboard");
   } else {
-    res.render("authentication/otpVerifyPage", { success: "", error: "" });
+    res.render("authentication/otpVerifyPage", {
+      success: req.flash("success"),
+      error: req.flash("error"),
+    });
   }
 };
 
@@ -470,11 +478,12 @@ const checkOTP = async (req, res) => {
   if (req.body.OTP == req.cookies.OTP) {
     res.redirect("/newPasswordPage");
   } else {
-    res.redirect("back");
-    console.log("OTP has not matched...");
     req.flash("error", "OTP has not matched, please try again");
+    res.redirect("/otpVerifyPage");
+    console.log("OTP has not matched...");
   }
 };
+
 const newPasswordPage = (req, res) => {
   res.render("authentication/newPasswordPage", {
     success: req.flash("success"),
@@ -538,10 +547,7 @@ const adminRegister = async (req, res) => {
       req.body.admin_image = req.file.filename;
       const insert = await Admin.create(req.body);
       if (insert) {
-        req.flash(
-          "success",
-          `${insert.admin_name} Admin Registered Successfully`
-        );
+        req.flash("success", `${insert.admin_name} Registered Successfully`);
       } else {
         console.log("Admin Data is not insertion...");
       }

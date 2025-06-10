@@ -171,5 +171,76 @@
       }
     </script>
     <script src="../assets/js/argon-dashboard.min.js?v=2.1.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.19.1/dist/sweetalert2.all.min.js"></script>
+
+    <script>
+
+          <%if (success && success.length > 0) { %>
+
+              Swal.fire({
+                  title: "Success!",
+                  text: "<%= success%>",
+                  icon: "success"
+              });
+
+
+              Toastify({
+                  text: "<%= success%>",
+                  duration: 5000,
+                  close: true,
+                  gravity: "top",
+                  position: "right",
+                  stopOnFocus: true,
+                  style: {
+                      background: "linear-gradient(135deg, #11998e , #38ef7d )",
+                      color: "#fff",
+                      fontFamily: "Arial, sans-serif",
+                      fontSize: "16px",
+                      borderRadius: "8px",
+                      boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
+                      padding: "12px 20px",
+                      width: "300px",
+                      margin: "20px", // Extra margin around toast
+                  },
+                  className: "login-toast",
+              }).showToast();
+
+
+      <%}%>
+
+
+      <%if (error && error.length > 0) { %>
+
+              Swal.fire({
+                  title: "Error!",
+                  text: "<%= error%>",
+                  icon: "error"
+              });
+
+
+              Toastify({
+                  text: "<%= error%>",
+                  duration: 5000,
+                  close: true,
+                  gravity: "top",
+                  position: "right",
+                  stopOnFocus: true,
+                  style: {
+                      background: "linear-gradient(135deg, #11998e , #38ef7d )",
+                      color: "#fff",
+                      fontFamily: "Arial, sans-serif",
+                      fontSize: "16px",
+                      borderRadius: "8px",
+                      boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
+                      padding: "12px 20px",
+                      width: "300px",
+                      margin: "20px", // Extra margin around toast
+                  },
+                  className: "login-toast",
+              }).showToast();
+
+
+      <%}%>
+    </script>
   </body>
 </html>
