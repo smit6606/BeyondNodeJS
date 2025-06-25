@@ -1,0 +1,83 @@
+<%- include('../header') %>
+
+<div class="page-wrapper">
+  <div class="page-breadcrumb">
+    <div class="row">
+      <div class="col-12 d-flex no-block align-items-center">
+        <h4 class="page-title">Add New Sub Category</h4>
+        <div class="ms-auto text-end">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+              <li class="breadcrumb-item active" aria-current="page">
+                Sub Category Form
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-7 offset-md-3">
+        <div class="card">
+          <form
+            method="POST"
+            action="/subCategory/insertSubCategory"
+            class="form-horizontal"
+          >
+            <div class="card-body">
+              <h4 class="card-title mb-4 text-center">Add Sub Category</h4>
+
+              <!-- Parent Category Select -->
+              <div class="form-group">
+                <label>Select Parent Category</label>
+                <select name="category_id" class="form-control w-100" required>
+                  <option value="">-- Select Category --</option>
+                  <% allCategory.forEach(cat => { %>
+                  <option value="<%= cat._id %>"><%= cat.c_title %></option>
+                  <% }) %>
+                </select>
+              </div>
+
+              <!-- Sub Category Title -->
+              <div class="form-group">
+                <label>Sub Category Title</label>
+                <input
+                  type="text"
+                  name="subcategory_title"
+                  class="form-control w-100"
+                  placeholder="Enter Sub Category Title"
+                  required
+                />
+              </div>
+
+              <!-- Sub Category Description -->
+              <div class="form-group">
+                <label>Description</label>
+                <textarea
+                  name="subcategory_description"
+                  class="form-control w-100"
+                  rows="3"
+                  placeholder="Write a short description..."
+                ></textarea>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="border-top">
+              <div class="card-body text-center">
+                <button type="submit" class="btn btn-success px-5">
+                  Add Sub Category
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <%- include('../footer') %>
+      </div>
+    </div>
+  </div>
+</div>

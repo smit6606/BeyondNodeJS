@@ -13,7 +13,7 @@ const port = 5000;
 app.set("view engine", "ejs");
 
 app.use(express.static(__dirname + "/public"));
-app.use(express.static(__dirname + "/uploads"));
+app.use("/uploads", express.static(__dirname + "/uploads"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -37,7 +37,8 @@ app.use(passport.initialize());
 // flash
 app.use(flash());
 // Routes
-app.use("/", require("./routes/adminRoutes/adminRoute"));
+app.use("/", require("./routes/adminRoute"));
+
 // Server
 app.listen(port, (e) => {
   if (e) {

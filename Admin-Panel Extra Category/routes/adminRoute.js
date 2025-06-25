@@ -25,20 +25,11 @@ const {
   newSetPassword,
   changePassword,
   updatePassword,
-} = require("../../controllers/adminController/adminCtr");
+} = require("../controllers/adminController");
 
 console.log("Admin route loaded");
 
-// Multer config (if you're uploading files later, for now it's unused)
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/");
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname);
-  },
-});
-const upload = multer({ storage: storage });
+const upload = require("../middleware/adminMulter");
 
 // GET Routes
 router.get("/", passport.checkLostPasswordAuthentication, signInPage);
@@ -90,5 +81,29 @@ router.post(
   editAdminFunction
 );
 router.post("/updateProfile/:id", upload.single("admin_image"), updateProfile);
+
+router.use(
+  "/category",
+  passport.checkAuthentication,
+  require("./categoryRoute")
+);
+
+router.use(
+  "/subCategory",
+  passport.checkAuthentication,
+  require("./subCategoryRoute")
+);
+
+router.use(
+  "/extraCategory",
+  passport.checkAuthentication,
+  require("./extraCategoryRoute")
+);
+
+router.use(
+  "/product",
+  passport.checkAuthentication,
+  require("./productsRoute")
+);
 
 module.exports = router;

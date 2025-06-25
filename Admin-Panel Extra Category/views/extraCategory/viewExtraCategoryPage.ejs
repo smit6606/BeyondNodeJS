@@ -1,0 +1,123 @@
+<%- include('../header') %>
+
+<main class="main-content position-relative border-radius-lg">
+  <nav
+    class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl"
+    id="navbarBlur"
+    data-scroll="false"
+  >
+    <div class="container-fluid py-1 px-3">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+          <li class="breadcrumb-item text-sm">
+            <a class="opacity-5 text-white" href="/">Dashboard</a>
+          </li>
+          <li
+            class="breadcrumb-item text-sm text-white active"
+            aria-current="page"
+          >
+            Extra Categories
+          </li>
+        </ol>
+        <h6 class="font-weight-bolder text-white mb-0">
+          View Extra Categories
+        </h6>
+      </nav>
+    </div>
+  </nav>
+
+  <div class="container-fluid py-4">
+    <div class="row">
+      <div class="col-12">
+        <div class="card mb-4">
+          <div class="card-header pb-0">
+            <h4>Extra Categories List</h4>
+          </div>
+          <div class="card-body px-0 pt-0 pb-2">
+            <div class="table-responsive p-0">
+              <table class="table align-items-center mb-0">
+                <thead>
+                  <tr>
+                    <th
+                      class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      Category
+                    </th>
+                    <th
+                      class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      Sub Category
+                    </th>
+                    <th
+                      class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      Extra Category Title
+                    </th>
+                    <th
+                      class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      Description
+                    </th>
+                    <th
+                      class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% extraCategoryData.forEach((extra) => { %>
+                  <tr>
+                    <td class="text-center">
+                      <p class="text-xs font-weight-bold mb-0">
+                        <%= extra.category_id?.c_title || 'N/A' %>
+                      </p>
+                    </td>
+                    <td class="text-center">
+                      <p class="text-xs font-weight-bold mb-0">
+                        <%= extra.subCategory_id?.subcategory_title %>
+                      </p>
+                    </td>
+                    <td class="text-center">
+                      <p class="text-xs font-weight-bold mb-0">
+                        <%= extra.extraCategory_title %>
+                      </p>
+                    </td>
+                    <td class="text-center">
+                      <p class="text-xs font-weight-bold mb-0">
+                        <%= extra.extraCategory_description %>
+                      </p>
+                    </td>
+                    <td class="align-middle text-center">
+                      <a
+                        href="/extraCategory/editExtraCategoryPage/<%= extra._id %>"
+                        class="text-secondary font-weight-bold text-xs"
+                        data-toggle="tooltip"
+                        data-original-title="Edit Extra Category"
+                        >Edit</a
+                      >
+                      |
+                      <a
+                        href="/extraCategory/deleteExtraCategory/<%= extra._id %>"
+                        onclick="return confirm('Are you sure you want to delete this extra category?')"
+                        class="text-danger font-weight-bold text-xs"
+                        data-toggle="tooltip"
+                        data-original-title="Delete Extra Category"
+                        >Delete</a
+                      >
+                    </td>
+                  </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+              <% if (extraCategoryData.length === 0) { %>
+              <div class="text-center p-4">No Extra Categories found.</div>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%- include('../footer') %>
+  </div>
+</main>

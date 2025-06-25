@@ -1,0 +1,93 @@
+<%- include('../header') %>
+
+<div class="page-wrapper">
+  <div class="page-breadcrumb">
+    <div class="row">
+      <div class="col-12 d-flex no-block align-items-center">
+        <h4 class="page-title">Edit Category</h4>
+        <div class="ms-auto text-end">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+              <li class="breadcrumb-item active" aria-current="page">
+                Category Form
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-7 offset-md-3">
+        <div class="card">
+          <form
+            method="POST"
+            action="/category/updateCategory/<%= categoryData._id %>"
+            enctype="multipart/form-data"
+            class="form-horizontal"
+          >
+            <div class="card-body">
+              <h4 class="card-title mb-4 text-center">Edit Category</h4>
+
+              <!-- Category Title -->
+              <div class="form-group">
+                <label>Category Title</label>
+                <input
+                  type="text"
+                  name="c_title"
+                  value="<%= categoryData.c_title %>"
+                  class="form-control w-100"
+                  placeholder="Enter Category Title"
+                  required
+                />
+              </div>
+
+              <!-- Category Description -->
+              <div class="form-group">
+                <label>Description</label>
+                <textarea
+                  name="c_description"
+                  class="form-control w-100"
+                  rows="3"
+                  placeholder="Write a short description..."
+                >
+                  <%= categoryData.c_description %></textarea
+                >
+              </div>
+
+              <!-- Category Image -->
+              <div class="form-group">
+                <label>Upload Image</label>
+                <div class="custom-file">
+                  <input class="form-control" type="file" name="c_image" />
+                </div>
+              </div>
+
+              <!-- Existing Image Preview -->
+              <div class="text-center mt-3 mb-3">
+                <img
+                  src="../../<%= categoryData.c_image %>"
+                  height="100"
+                  alt="Category Image"
+                />
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="border-top">
+              <div class="card-body text-center">
+                <button type="submit" class="btn btn-success px-5">
+                  Update Category
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <%- include('../footer') %>
+      </div>
+    </div>
+  </div>
+</div>

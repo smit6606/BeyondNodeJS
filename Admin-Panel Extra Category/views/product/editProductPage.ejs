@@ -1,0 +1,136 @@
+<%- include('../header') %>
+
+<div class="page-wrapper">
+  <div class="page-breadcrumb">
+    <div class="row">
+      <div class="col-12 d-flex no-block align-items-center">
+        <h4 class="page-title">Edit Product</h4>
+        <div class="ms-auto text-end">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Edit Product</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-7 offset-md-3">
+        <div class="card">
+          <form method="POST" action="/product/updateProduct/<%= productData._id %>" enctype="multipart/form-data" class="form-horizontal">
+            <div class="card-body">
+              <h4 class="card-title mb-4 text-center">Update Product </h4>
+
+              <!-- Category -->
+              <div class="form-group">
+                <label>Select Category</label>
+                <select name="category_id" class="form-control w-100 border" required>
+                  <option value="">-- Select Category --</option>
+                  <% allCategory.forEach(category => { %>
+                  <option value="<%= category._id %>" <%if(productData.category_id.c_title == category.c_title) {%>selected <%}%>  >
+                    <%= category.c_title %> 
+                  </option>
+                  <% }); %>
+                </select>
+              </div>
+
+              <!-- Sub Category -->
+              <div class="form-group">
+                <label>Select Sub Category</label>
+                <select name="subCategory_id" class="form-control w-100 border" required>
+                  <option value="">-- Select Sub Category --</option>
+                  <% allSubCategory.forEach(subcat => { %>
+                  <option value="<%= subcat._id %>" <%if(productData.subCategory_id.subcategory_title == subcat.subcategory_title) {%>selected <%}%>  >
+                    <%= subcat.subcategory_title %> 
+                  </option>
+                  <% }); %>
+                </select>
+              </div>
+
+              <!-- Extra Category -->
+              <div class="form-group">
+                <label>Select Extra Category</label>
+                <select name="extraCategory_id" class="form-control w-100 border" required>
+                  <option value="">-- Select Extra Category --</option>
+                  <% allExtraCategory.forEach(extra => { %>
+                  <option value="<%= extra._id %>" <% if(productData.extraCategory_id.extraCategory_title === extra.extraCategory_title){%> selected<% } %>>
+                    <%= extra.extraCategory_title %>
+                  </option>
+                  <% }); %>
+                </select>
+              </div>
+
+              <!-- Product Name -->
+              <div class="form-group">
+                <label>Product Name</label>
+                <input
+                  type="text"
+                  name="product_name"
+                  class="form-control w-100 border"
+                  value="<%= productData.product_name %>"
+                  required
+                />
+              </div>
+
+              <!-- Description -->
+              <div class="form-group">
+                <label>Product Description</label>
+                <textarea
+                  name="product_description"
+                  class="form-control w-100 border"
+                  rows="3"
+                  required
+                ><%= productData.product_description %></textarea>
+              </div>
+
+              <!-- Price -->
+              <div class="form-group">
+                <label>Product Price</label>
+                <input
+                  type="number"
+                  name="product_price"
+                  class="form-control w-100 border"
+                  value="<%= productData.product_price %>"
+                  required
+                />
+              </div>
+
+              <!-- Image Upload -->
+              <div class="form-group">
+                <label>Upload New Image</label>
+                <input
+                  class="form-control border"
+                  type="file"
+                  name="product_image"
+                />
+            
+              </div>
+
+              <!-- Image Preview -->
+              <% if (productData.product_image) { %>
+              <div class="form-group text-center">
+                <label>Current Product Image</label>
+                <div>
+                  <img src="../../<%= productData.product_image %>" alt="Product Image" class="img-fluid rounded shadow-sm" style="max-height: 200px;" />
+                </div>
+              </div>
+              <% } %>
+            </div>
+
+            <!-- Submit -->
+            <div class="border-top">
+              <div class="card-body text-center">
+                <button type="submit" class="btn btn-warning px-5">Update Product</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <%- include('../footer') %>
+      </div>
+    </div>
+  </div>
+</div>

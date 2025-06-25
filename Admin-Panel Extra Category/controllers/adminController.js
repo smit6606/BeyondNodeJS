@@ -1,4 +1,4 @@
-const Admin = require("../../models/adminModel/adminModel");
+const Admin = require("../models/adminModel");
 const nodemailer = require("nodemailer");
 const fs = require("fs");
 
@@ -117,6 +117,8 @@ const viewAdmin = async (req, res) => {
     let adminData = await Admin.find({});
     const currentAdmin = req.user;
 
+    adminData = adminData.filter((data) => data.id != currentAdmin._id);
+
     console.log("User Data", adminData);
 
     res.render("admin/viewAdmin", {
@@ -208,7 +210,7 @@ const editAdminFunction = async (req, res) => {
           console.error("Error deleting old image:", err.message);
         }
       }
-      req.body.admin_image = req.file.filename;
+      req.body.admin_image = req.file.path;
     } else {
       req.body.admin_image = data.admin_image;
     }
@@ -458,11 +460,17 @@ const checkEmail = async (req, res) => {
 };
 
 const otpVerifyPage = (req, res) => {
-  const currentAdmin = req.cookies.admin;
-  if (currentAdmin != undefined) {
-    res.redirect("/dashboard");
+  const adminEmail = req.cookies.email;
+  const OTP = req.cookies.OTP;
+
+  if (adminEmail && OTP) {
+    res.render("authentication/otpVerifyPage", {
+      error: req.flash("error"),
+      success: req.flash("success"),
+    });
   } else {
-    res.render("authentication/otpVerifyPage", { success: "", error: "" });
+    req.flash("error", "OTP expired or missing!");
+    res.redirect("/");
   }
 };
 
@@ -479,10 +487,17 @@ const checkOTP = async (req, res) => {
   }
 };
 const newPasswordPage = (req, res) => {
-  res.render("authentication/newPasswordPage", {
-    success: req.flash("success"),
-    error: req.flash("error"),
-  });
+  const adminEmail = req.cookies.email;
+  const OTP = req.cookies.OTP;
+  if (adminEmail && OTP) {
+    res.render("authentication/newPasswordPage", {
+      error: req.flash("error"),
+      success: req.flash("success"),
+    });
+  } else {
+    req.flash("error", "OTP expired or missing!");
+    res.redirect("/");
+  }
 };
 
 const newSetPassword = async (req, res) => {
@@ -538,7 +553,7 @@ const adminRegister = async (req, res) => {
     if (req.body.admin_password !== req.body.confirm_password) {
       req.flash("error", "Password and Confirm Password do not match");
     } else {
-      req.body.admin_image = req.file.filename;
+      req.body.admin_image = req.file.path;
       const insert = await Admin.create(req.body);
       if (insert) {
         req.flash("success", `${insert.admin_name} Registered Successfully`);

@@ -6,13 +6,13 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <link href="/assets/vendor/nucleo/css/nucleo.css" rel="stylesheet" />
+    <link href="../../assets/vendor/nucleo/css/nucleo.css" rel="stylesheet" />
     <link
       rel="apple-touch-icon"
       sizes="76x76"
-      href="assets/img/apple-icon.png"
+      href="../../assets/img/apple-icon.png"
     />
-    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+    <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
     <title>Argon Dashboard</title>
     <!--     Fonts and icons     -->
     <link
@@ -36,13 +36,20 @@
     <!-- CSS Files -->
     <link
       id="pagestyle"
-      href="assets/css/argon-dashboard.css?v=2.1.0"
+      href="../../assets/css/argon-dashboard.css?v=2.1.0"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
   </head>
 
   <body class="g-sidenav-show bg-gray-100">
-    <div class="min-height-300 bg-dark position-absolute w-100"></div>
+    <div
+      class="min-height-300 position-absolute w-100"
+      style="background-color: #344767"
+    ></div>
     <aside
       class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4"
       id="sidenav-main"
@@ -55,7 +62,7 @@
         ></i>
         <a class="navbar-brand m-0" href="javascript:void(0)">
           <img
-            src="assets/img/logo-ct-dark.png"
+            src="../../assets/img/logo-ct-dark.png"
             width="26px"
             height="26px"
             class="navbar-brand-img h-100"
@@ -66,7 +73,8 @@
       </div>
       <hr class="horizontal dark mt-0" />
       <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav accordion" id="accordionSidebar">
+          <!-- Dashboard -->
           <li class="nav-item">
             <a class="nav-link active" href="/dashboard">
               <div
@@ -77,11 +85,13 @@
               <span class="nav-link-text ms-1">Dashboard</span>
             </a>
           </li>
+
+          <!-- Reusable Accordion Item Template -->
           <li class="nav-item">
             <a
-              class="nav-link d-flex align-items-center"
-              href="#adminAccordion"
+              class="nav-link collapsed d-flex align-items-center"
               data-bs-toggle="collapse"
+              href="#adminAccordion"
               role="button"
               aria-expanded="false"
               aria-controls="adminAccordion"
@@ -93,25 +103,177 @@
               </div>
               <span class="nav-link-text ms-1">Admin</span>
             </a>
-
-            <div class="collapse" id="adminAccordion">
+            <div
+              class="collapse"
+              id="adminAccordion"
+              data-bs-parent="#accordionSidebar"
+            >
               <ul class="nav flex-column ms-4">
                 <li class="nav-item">
-                  <a class="nav-link" href="/addAdmin">
-                    <span class="nav-link-text ms-1">Add Admin</span>
-                  </a>
+                  <a class="nav-link" href="/addAdmin">Add Admin</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/viewAdmin">
-                    <span class="nav-link-text ms-1">View Admin</span>
-                  </a>
+                  <a class="nav-link" href="/viewAdmin">View Admin</a>
                 </li>
               </ul>
             </div>
           </li>
 
+          <!-- Category Accordion -->
           <li class="nav-item">
-            <a class="nav-link" href="/adminProfile">
+            <a
+              class="nav-link collapsed d-flex align-items-center"
+              data-bs-toggle="collapse"
+              href="#categoryAccordion"
+              role="button"
+              aria-expanded="false"
+              aria-controls="categoryAccordion"
+            >
+              <div
+                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i
+                  class="ni ni-bullet-list-67 text-dark text-sm opacity-10"
+                ></i>
+              </div>
+              <span class="nav-link-text ms-1">Category</span>
+            </a>
+            <div
+              class="collapse"
+              id="categoryAccordion"
+              data-bs-parent="#accordionSidebar"
+            >
+              <ul class="nav flex-column ms-4">
+                <li class="nav-item">
+                  <a class="nav-link" href="/category/addCategoryPage"
+                    >Add Category</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/category/viewCategoryPage"
+                    >View Category</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- Sub Category Accordion -->
+          <li class="nav-item">
+            <a
+              class="nav-link collapsed d-flex align-items-center"
+              data-bs-toggle="collapse"
+              href="#subCategoryAccordion"
+              role="button"
+              aria-expanded="false"
+              aria-controls="subCategoryAccordion"
+            >
+              <div
+                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i class="ni ni-tag text-dark text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Sub Category</span>
+            </a>
+            <div
+              class="collapse"
+              id="subCategoryAccordion"
+              data-bs-parent="#accordionSidebar"
+            >
+              <ul class="nav flex-column ms-4">
+                <li class="nav-item">
+                  <a class="nav-link" href="/subCategory/addSubCategoryPage"
+                    >Add Sub Category</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/subCategory/viewSubCategoryPage"
+                    >View Sub Category</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- Extra Category Accordion -->
+          <li class="nav-item">
+            <a
+              class="nav-link collapsed d-flex align-items-center"
+              data-bs-toggle="collapse"
+              href="#extraCategoryAccordion"
+              role="button"
+              aria-expanded="false"
+              aria-controls="extraCategoryAccordion"
+            >
+              <div
+                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i class="ni ni-collection text-dark text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Extra Category</span>
+            </a>
+            <div
+              class="collapse"
+              id="extraCategoryAccordion"
+              data-bs-parent="#accordionSidebar"
+            >
+              <ul class="nav flex-column ms-4">
+                <li class="nav-item">
+                  <a class="nav-link" href="/extraCategory/addExtraCategoryPage"
+                    >Add Extra Category</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    href="/extraCategory/viewExtraCategoryPage"
+                    >View Extra Category</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- Product Tab -->
+          <li class="nav-item">
+            <a
+              class="nav-link collapsed d-flex align-items-center"
+              data-bs-toggle="collapse"
+              href="#productAccordion"
+              role="button"
+              aria-expanded="false"
+              aria-controls="productAccordion"
+            >
+              <div
+                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i class="ni ni-box-2 text-dark text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Products</span>
+            </a>
+            <div
+              class="collapse"
+              id="productAccordion"
+              data-bs-parent="#accordionSidebar"
+            >
+              <ul class="nav flex-column ms-4">
+                <li class="nav-item">
+                  <a class="nav-link" href="/product/addProductPage"
+                    >Add Product</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/product/viewProductPage"
+                    >View Product</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- Profile -->
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center" href="/adminProfile">
               <div
                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center"
               >
@@ -121,21 +283,6 @@
             </a>
           </li>
         </ul>
-      </div>
-      <div class="sidenav-footer mx-3">
-        <div class="card card-plain shadow-none" id="sidenavCard">
-          <img
-            class="w-50 mx-auto"
-            src="assets/img/illustrations/icon-documentation.svg"
-            alt="sidebar_illustration"
-          />
-          <div class="card-body text-center p-3 w-100 pt-0">
-            <div class="docs-info">
-              <h6 class="mb-0">Need help?</h6>
-              <p class="text-xs font-weight-bold mb-0">Please check our docs</p>
-            </div>
-          </div>
-        </div>
       </div>
     </aside>
   </body>

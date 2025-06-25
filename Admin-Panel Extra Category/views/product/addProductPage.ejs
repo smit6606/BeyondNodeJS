@@ -1,0 +1,148 @@
+<%- include('../header') %>
+
+<div class="page-wrapper">
+  <div class="page-breadcrumb">
+    <div class="row">
+      <div class="col-12 d-flex no-block align-items-center">
+        <h4 class="page-title">Add New Product</h4>
+        <div class="ms-auto text-end">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+              <li class="breadcrumb-item active" aria-current="page">
+                Add Product
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-7 offset-md-3">
+        <div class="card">
+          <form
+            method="POST"
+            action="/product/insertProduct"
+            enctype="multipart/form-data"
+            class="form-horizontal"
+          >
+            <div class="card-body">
+              <h4 class="card-title mb-4 text-center">Add New Product</h4>
+
+              <!-- Category Dropdown -->
+              <div class="form-group">
+                <label>Select Category</label>
+                <select name="category_id" class="form-control w-100" required>
+                  <option value="">-- Select Category --</option>
+                  <% allCategory.forEach(category => { %>
+                  <option value="<%= category._id %>">
+                    <%= category.c_title %>
+                  </option>
+                  <% }); %>
+                </select>
+              </div>
+
+              <!-- Sub Category Dropdown -->
+              <div class="form-group">
+                <label>Select Sub Category</label>
+                <select
+                  name="subCategory_id"
+                  class="form-control w-100"
+                  required
+                >
+                  <option value="">-- Select Sub Category --</option>
+                  <% allSubCategory.forEach(subcat => { %>
+                  <option value="<%= subcat._id %>">
+                    <%= subcat.subcategory_title %>
+                  </option>
+                  <% }); %>
+                </select>
+              </div>
+
+              <!-- Extra Category Dropdown -->
+              <div class="form-group">
+                <label>Select Extra Category</label>
+                <select
+                  name="extraCategory_id"
+                  class="form-control w-100"
+                  required
+                >
+                  <option value="">-- Select Extra Category --</option>
+                  <% allExtraCategory.forEach(extra => { %>
+                  <option value="<%= extra._id %>">
+                    <%= extra.extraCategory_title %>
+                  </option>
+                  <% }); %>
+                </select>
+              </div>
+
+              <!-- Product Name -->
+              <div class="form-group">
+                <label>Product Name</label>
+                <input
+                  type="text"
+                  name="product_name"
+                  class="form-control w-100"
+                  placeholder="Enter Product Name"
+                  required
+                />
+              </div>
+
+              <!-- Product Description -->
+              <div class="form-group">
+                <label>Product Description</label>
+                <textarea
+                  name="product_description"
+                  class="form-control w-100"
+                  rows="3"
+                  placeholder="Write a short description..."
+                ></textarea>
+              </div>
+
+              <!-- Product Price -->
+              <div class="form-group">
+                <label>Product Price</label>
+                <input
+                  type="number"
+                  name="product_price"
+                  class="form-control w-100"
+                  placeholder="Enter Product Price"
+                  required
+                />
+              </div>
+
+              <!-- Product Image -->
+              <div class="form-group">
+                <label>Upload Product Image</label>
+                <div class="custom-file">
+                  <input
+                    class="form-control"
+                    type="file"
+                    name="product_image"
+                    required
+                  />
+                  <label class="custom-file-label" for="productImage"
+                    >Choose file...</label
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="border-top">
+              <div class="card-body text-center">
+                <button type="submit" class="btn btn-success px-5">
+                  Add Product
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <%- include('../footer') %>
+      </div>
+    </div>
+  </div>
+</div>

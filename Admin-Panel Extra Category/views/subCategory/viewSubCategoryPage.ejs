@@ -1,7 +1,6 @@
 <%- include('../header') %>
 
 <main class="main-content position-relative border-radius-lg">
-  <!-- Navbar -->
   <nav
     class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl"
     id="navbarBlur"
@@ -185,237 +184,91 @@
       </div>
     </div>
   </nav>
-  <!-- End Navbar -->
+
   <div class="container-fluid py-4">
     <div class="row">
       <div class="col-12">
         <div class="card mb-4">
           <div class="card-header pb-0">
-            <h4>View Admin</h4>
+            <h4>View Sub Categories</h4>
           </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
-              <% if(currentAdmin.admin_email=="smeetgarala6606@gmail.com" ) { %>
-
               <table class="table align-items-center mb-0">
                 <thead>
                   <tr>
                     <th
-                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                      class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7"
+                      style="width: 10%"
                     >
-                      Admin Name
+                      Parent Category
                     </th>
                     <th
-                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                      class="text-uppercase w-25 text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                      style="width: 10%"
                     >
-                      Admin Username
+                      Sub Category Title
                     </th>
                     <th
-                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                      class="text-uppercase w-25 text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                      style="width: 40%"
                     >
-                      Mobile No
+                      Description
                     </th>
                     <th
-                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                      class="text-secondary w-25 opacity-7 text-center"
+                      style="width: 10%"
                     >
-                      Function
+                      Actions
                     </th>
-                    <th
-                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                    >
-                      Status
-                    </th>
-                    <th
-                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                    >
-                      Employed
-                    </th>
-                    <th
-                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                    >
-                      Action
-                    </th>
-                    <th class="text-secondary opacity-7"></th>
                   </tr>
                 </thead>
                 <tbody>
-                  <%adminData.map((data,index)=>{ %>
+                  <% subCategoryData.forEach((sub) => { %>
                   <tr>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div>
-                          <img
-                            src="../../<%= data.admin_image %>"
-                            class="avatar avatar-sm me-3"
-                            alt="user1"
-                          />
-                        </div>
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm"><%= data.admin_name %></h6>
-                          <p class="text-xs text-secondary mb-0">
-                            <%= data.admin_email %>
-                          </p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
+                    <td class="text-center">
                       <p class="text-xs font-weight-bold mb-0">
-                        <%= data.admin_username %>
+                        <%= sub.category_id?.c_title || 'N/A' %>
                       </p>
                     </td>
-                    <td>
+                    <td class="text-center">
                       <p class="text-xs font-weight-bold mb-0">
-                        <%= data.admin_phone %>
+                        <%= sub.subcategory_title %>
                       </p>
                     </td>
-                    <td>
+                    <td class="text-center">
                       <p class="text-xs font-weight-bold mb-0">
-                        <%= data.admin_role %>
+                        <%= sub.subcategory_description %>
                       </p>
                     </td>
-                    <td class="align-middle text-center text-sm">
-                      <span
-                        class="badge badge-sm <%if(data.admin_status === 'Active') {%> bg-gradient-success <%} else {%> bg-gradient-danger <%}%>"
-                      >
-                        <%= data.admin_status %>
-                      </span>
-                    </td>
-                    <td class="align-middle text-center">
-                      <span class="text-secondary text-xs font-weight-bold">
-                        <% const createdAt = new Date(data.admin_createdAt);
-                        const day = String(createdAt.getDate()).padStart(2,
-                        '0'); const month = String(createdAt.getMonth() +
-                        1).padStart(2, '0'); const year =
-                        createdAt.getFullYear(); const time = createdAt
-                        .toLocaleTimeString([], { hour: '2-digit', minute:
-                        '2-digit', hour12: true }) .replace(/am|pm/, match =>
-                        match.toUpperCase()); %> <%= `${day}-${month}-${year}
-                        ${time}` %>
-                      </span>
-                    </td>
-
                     <td class="align-middle text-center">
                       <a
-                        href="/editAdmin/?id=<%= data.id %>"
+                        href="/subCategory/editSubCategoryPage/<%= sub._id %>"
                         class="text-secondary font-weight-bold text-xs"
                         data-toggle="tooltip"
-                        data-original-title="Edit admin"
+                        data-original-title="Edit Sub Category"
                       >
                         Edit
                       </a>
                       |
                       <a
-                        href="/deleteAdmin/<%= data.id %>"
-                        onclick="return confirm('Are you sure?')"
+                        href="/subCategory/deleteSubCategory/<%= sub._id %>"
+                        onclick="return confirm('Are you sure you want to delete this sub category?')"
                         class="text-danger font-weight-bold text-xs"
                         data-toggle="tooltip"
-                        data-original-title="Delete admin"
+                        data-original-title="Delete Sub Category"
                       >
                         Delete
                       </a>
                     </td>
                   </tr>
-                  <% })%>
+                  <% }) %>
                 </tbody>
               </table>
-              <% } else { %>
-              <table class="table align-items-center mb-0">
-                <thead>
-                  <tr>
-                    <th
-                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                    >
-                      Admin Name
-                    </th>
-                    <th
-                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
-                    >
-                      Admin Username
-                    </th>
-                    <th
-                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
-                    >
-                      Mobile No
-                    </th>
-                    <th
-                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
-                    >
-                      Function
-                    </th>
-                    <th
-                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                    >
-                      Status
-                    </th>
-                    <th
-                      class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                    >
-                      Employed
-                    </th>
-                    <th class="text-secondary opacity-7"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <%adminData.map((data,index)=>{ %>
-                  <tr>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div>
-                          <img
-                            src="<%= data.admin_image %>"
-                            class="avatar avatar-sm me-3"
-                            alt="user1"
-                          />
-                        </div>
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm"><%= data.admin_name %></h6>
-                          <p class="text-xs text-secondary mb-0">
-                            <%= data.admin_email %>
-                          </p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="text-xs font-weight-bold mb-0">
-                        <%= data.admin_username %>
-                      </p>
-                    </td>
-                    <td>
-                      <p class="text-xs font-weight-bold mb-0">
-                        <%= data.admin_phone %>
-                      </p>
-                    </td>
-                    <td>
-                      <p class="text-xs font-weight-bold mb-0">
-                        <%= data.admin_role %>
-                      </p>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                      <span
-                        class="badge badge-sm <%if(data.admin_status === 'active') {%> bg-gradient-success <%} else {%> bg-gradient-danger <%}%>"
-                      >
-                        <%= data.admin_status %>
-                      </span>
-                    </td>
-                    <td class="align-middle text-center">
-                      <span class="text-secondary text-xs font-weight-bold">
-                        <% const createdAt = new Date(data.admin_createdAt);
-                        const day = String(createdAt.getDate()).padStart(2,
-                        '0'); const month = String(createdAt.getMonth() +
-                        1).padStart(2, '0'); const year =
-                        createdAt.getFullYear(); const time = createdAt
-                        .toLocaleTimeString([], { hour: '2-digit', minute:
-                        '2-digit', hour12: true }) .replace(/am|pm/, match =>
-                        match.toUpperCase()); %> <%= `${day}-${month}-${year}
-                        ${time}` %>
-                      </span>
-                    </td>
-                  </tr>
-                  <% })%>
-                </tbody>
-              </table>
-
-              <% } %>
+              <% if (subCategoryData.length === 0) { %>
+              <div class="text-center mt-4">
+                <p class="text-muted">No Sub Categories found.</p>
+                <% } %>
             </div>
           </div>
         </div>
